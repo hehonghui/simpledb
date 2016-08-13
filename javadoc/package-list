@@ -1,0 +1,10 @@
+com.simple.database
+com.simple.database.crud
+com.simple.database.crud.base
+com.simple.database.cursor
+com.simple.database.dao
+com.simple.database.dao.async
+com.simple.database.listeners
+com.simple.database.task
+com.simple.database.upgrade
+com.simple.database.utils

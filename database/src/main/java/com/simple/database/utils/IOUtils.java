@@ -11,7 +11,7 @@ public final class IOUtils {
 
     /**
      * 关闭Closeable对象
-     * @param closeable
+     * @param closeable 要关闭的closeable
      */
 	public static void closeSilently(Closeable closeable) {
 		if (closeable != null) {
@@ -25,7 +25,7 @@ public final class IOUtils {
 
     /**
      * 关闭cursor对象, 在api 16之前Cursor对象没有实现 Closeable 接口 ！！！！
-     * @param cursor
+     * @param cursor 要关闭的cursor
      */
     public static void closeCursor(Cursor cursor) {
         if (cursor != null) {

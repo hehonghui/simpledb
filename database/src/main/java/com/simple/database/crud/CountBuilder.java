@@ -4,6 +4,7 @@ import com.simple.database.crud.base.WhereBuilder;
 import com.simple.database.listeners.DbListener;
 
 /**
+ * 查询数量的Builder, 可以设置 where 参数
  * Created by mrsimple on 6/8/16.
  */
 public class CountBuilder extends WhereBuilder<Integer> {

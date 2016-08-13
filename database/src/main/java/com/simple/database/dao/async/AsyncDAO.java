@@ -9,7 +9,7 @@ import java.lang.reflect.Constructor;
 import java.util.List;
 
 /**
- * 异步数据库操作基类, 读数据库可以使用 并发,写时只能是单线程写
+ * 异步数据库操作基类, 读数据库可以使用并发,写时只能是单线程写. 使用方式为:
  *
  * @param <T> 要操作的实体类型
  */
@@ -73,7 +73,7 @@ public class AsyncDAO<T> {
     /**
      * 插入单项数据
      *
-     * @param item
+     * @param item 要插入的数据
      */
     public void insert(final T item) {
         new NoReturnTask() {
@@ -87,7 +87,7 @@ public class AsyncDAO<T> {
     /**
      * 批量插入
      *
-     * @param items
+     * @param items 要插入的数据列表
      */
     public void insert(final List<T> items) {
         new NoReturnTask() {

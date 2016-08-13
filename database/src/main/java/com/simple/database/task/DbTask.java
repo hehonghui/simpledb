@@ -36,12 +36,11 @@ import java.util.concurrent.Executors;
 
 
 /**
- * 数据库操作抽象类,该对象提交给线程池进行异步执行
+ * 数据库操作抽象类,该对象将数据库操作提交给线程池进行异步执行, 得到结果之后通过回调将结果投递给 ui 线程.
  *
  * @param <T> 返回的数据类型
  */
 public abstract class DbTask<T> {
-
     /**
      * 单线程的数据库线程池
      */

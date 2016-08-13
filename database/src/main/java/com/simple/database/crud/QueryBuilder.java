@@ -6,6 +6,8 @@ import com.simple.database.listeners.DbListener;
 import java.util.List;
 
 /**
+ * 查询数据的Builder, 能设置 where 、orderBy、limit参数.
+ *
  * @param <T> 要返回的数据类型
  */
 public class QueryBuilder<T> extends WhereBuilder {

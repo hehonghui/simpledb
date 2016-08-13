@@ -3,6 +3,7 @@ package com.simple.database.crud;
 import com.simple.database.crud.base.WhereBuilder;
 
 /**
+ * 更新数据的Builder, 只能设置 where 参数.
  * Created by mrsimple on 6/8/16.
  */
 public class UpdateBuilder<T> extends WhereBuilder<T> {

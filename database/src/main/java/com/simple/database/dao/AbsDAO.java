@@ -36,11 +36,11 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * 数据库操作接口, 所有操作均为同步操作,便于进行单元测试.
- * <p/>
+ * 数据库操作接口, 所有操作均为同步操作. 异步的数据库操作类需要使用 {@link com.simple.database.dao.async.AsyncDAO}.
+ * <p>
  * 子类需要覆写 {@link #convert(Object)} 和 {@link #parseResult(Cursor)} 函数实现对象的存、取.
- * <p/>
- * 注意 : 操作查询相关的功能要确保Cursoe对象正确的关闭!!! 避免Cursor泄露
+ * <p>
+ * 注意 : 操作查询相关的功能要确保Cursor对象正确的关闭!!! 避免Cursor泄露
  *
  * @param <T>
  * @author mrsimple
@@ -90,7 +90,7 @@ public abstract class AbsDAO<T> {
     /**
      * 保存数据
      *
-     * @param item
+     * @param item 要插入的对象
      */
     public void insert(final T item) {
         if (isInvalid(item)) {
@@ -102,8 +102,8 @@ public abstract class AbsDAO<T> {
     /**
      * 是否是无效 item
      *
-     * @param item
-     * @return
+     * @param item 要处理的对象
+     * @return 该对象是否是有效值
      */
     protected boolean isInvalid(T item) {
         return item == null;
@@ -159,7 +159,8 @@ public abstract class AbsDAO<T> {
     /**
      * 获取符合条件的表中记录数量
      *
-     * @param where 查询条件,例如 'where id > 10 '
+     * @param where where 语句
+     * @param args  where 参数
      * @return 数据表中的数据
      */
     public int count(String where, String[] args) {
@@ -175,11 +176,11 @@ public abstract class AbsDAO<T> {
     }
 
     /**
-     * 带参数的查询功能
+     * 查询单个数据
      *
-     * @param where
-     * @param args
-     * @return
+     * @param where where 语句
+     * @param args  where 参数
+     * @return 返回查询到的单个数据
      */
     public T queryOne(String where, String[] args) {
         List<T> result = query(where, args);
@@ -198,8 +199,8 @@ public abstract class AbsDAO<T> {
     /**
      * 带参数的查询功能
      *
-     * @param where
-     * @param args
+     * @param where where 语句
+     * @param args  where 参数
      * @return
      */
     public List<T> query(String where, String[] args) {
@@ -209,8 +210,10 @@ public abstract class AbsDAO<T> {
     /**
      * 带参数的查询功能
      *
-     * @param where
-     * @param args
+     * @param where   where 语句
+     * @param args    where 参数
+     * @param orderBy order by 参数
+     * @param limit   limit 参数
      * @return
      */
     public List<T> query(String where, String[] args, String orderBy, String limit) {
@@ -231,9 +234,9 @@ public abstract class AbsDAO<T> {
     /**
      * 更新实体
      *
-     * @param item
-     * @param where
-     * @param args
+     * @param item  要更新的对象
+     * @param where where 语句
+     * @param args  where 参数
      */
     public void update(T item, String where, String[] args) {
         mWritableDatabase.update(mTableName, convert(item), where, args);
@@ -242,8 +245,8 @@ public abstract class AbsDAO<T> {
     /**
      * 删除符合特定条件的数据
      *
-     * @param whereClause
-     * @param whereArgs
+     * @param whereClause where 语句
+     * @param whereArgs   where 参数
      */
     public void delete(String whereClause, String[] whereArgs) {
         mWritableDatabase.delete(mTableName, whereClause, whereArgs);
@@ -259,7 +262,7 @@ public abstract class AbsDAO<T> {
     /**
      * 设置插入时发生冲突的解决方法
      *
-     * @param algorithm
+     * @param algorithm 冲突时的处理策略 .  参数为 {@link SQLiteDatabase#CONFLICT_REPLACE} 、{@link SQLiteDatabase#CONFLICT_IGNORE} 等
      */
     public void setConflictAlgorithm(int algorithm) {
         this.mConflictAlgorithm = algorithm;
@@ -268,7 +271,7 @@ public abstract class AbsDAO<T> {
     /**
      * 设置是否移除重复的Item
      *
-     * @param remove
+     * @param remove 是否移除重复的数据
      */
     public void setRemoveRedundantItems(boolean remove) {
         this.removeRedundantItems = remove;

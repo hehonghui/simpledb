@@ -14,11 +14,9 @@ import java.util.List;
 
 /**
  * 数据库升级工具类,当数据库升级时会获取assets/migrations目录下的所有升级数据库的sql文件,sql文件以版本号命名,例如 3.sql。
- * 数据库更新时执行 oldVersion < sql file version <= newVersion的升级文件,使得不同版本之间的升级都可以顺利的进行.
+ * 数据库更新时执行旧版本的数据库版本 到 新版本数据库之间的sql文件,使得不同版本之间的升级都可以顺利的进行.
  * 例如最新的数据库版本号为4,当用户从数据库版本号为2的应用升级时,那么3.sql、4.sql将被执行.
- * <p/>
- * sql文件的规范为标准的sql语句,语句之间通过";"分隔.
- * <p/>
+ * 注意: sql文件的规范为标准的sql语句,语句之间通过";"分隔.
  * Created by mrsimple on 26/10/15.
  */
 public final class DbUpgradeHelper {

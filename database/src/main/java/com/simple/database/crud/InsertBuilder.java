@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 插入数据的Builder, 不能设置参数, 直接设置对象或者对象列表即可
  * Created by mrsimple on 6/8/16.
  */
 public class InsertBuilder<T> extends BaseSQLBuilder<T> {

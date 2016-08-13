@@ -35,7 +35,6 @@ import com.simple.database.crud.QueryBuilder;
 import com.simple.database.crud.UpdateBuilder;
 import com.simple.database.cursor.CloseCursorFactory;
 import com.simple.database.dao.AbsDAO;
-import com.simple.database.listeners.DbListener;
 import com.simple.database.upgrade.DbUpgradeHelper;
 import com.simple.database.upgrade.SqlParser;
 import com.simple.database.utils.IOUtils;
@@ -45,7 +44,7 @@ import java.io.InputStream;
 import java.util.List;
 
 /**
- * 文章基本信息、文章内容的数据库操作类,包含Article、ArticleDetail的存储、删除操作。
+ * 数据库 Helper 类, 控制 数据库的创建、升级以及获取 SQLiteDatabase对象
  *
  * @author mrsimple
  */
@@ -188,24 +187,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     /**
      * select 语句
-     *
-     * @param <T>
+     * @param daoClass dao类的class
+     * @param <T> 要操作的实体类型
      * @return
      */
     public static <T> QueryBuilder<T> selectFrom(Class<? extends AbsDAO<T>> daoClass) {
-        return new QueryBuilder<T>(daoClass).listener(new DbListener<List<T>>() {
-            @Override
-            public void onComplete(List<T> result) {
-
-            }
-        });
+        return new QueryBuilder<>(daoClass);
     }
 
     /**
      * 插入数据
      *
-     * @param daoClass
-     * @param <T>
+     * @param daoClass dao类的class
+     * @param <T> 要操作的实体类型
      * @return
      */
     public static <T> InsertBuilder<T> insertInto(Class<? extends AbsDAO<T>> daoClass) {
@@ -215,7 +209,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /**
      * update 语句
      *
-     * @param <T>
+     * @param daoClass dao类的class
+     * @param <T> 要操作的实体类型
      * @return
      */
     public static <T> UpdateBuilder<T> updateFrom(Class<? extends AbsDAO<T>> daoClass) {
@@ -225,7 +220,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /**
      * delete 语句
      *
-     * @param <T>
+     * @param daoClass dao类的class
+     * @param <T> 要操作的实体类型
      * @return
      */
     public static <T> DeleteBuilder<T> deleteFrom(Class<? extends AbsDAO<T>> daoClass) {
@@ -235,7 +231,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /**
      * 查询数据的数量
      *
-     * @param daoClass
+     * @param daoClass dao类的class
      * @return
      */
     public static CountBuilder countFrom(Class daoClass) {

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 
 /**
- * 创建数据库
+ * 创建数据库的参数 Builder 类， 设置数据库名、版本、创建数据库的sql文件、数据库更新sql目录等
  */
 public class Builder {
     /**

@@ -87,10 +87,6 @@ ALTER TABLE users ADD COLUMN gender INTEGER;
 
 从版本号为1升级到3时，那么就会执行上述的sql语句。
 
-**优点**: 
-
-
-
 > ***注意*** : 如果升级了任意表结构，一定要到升级版本号,并且在 assets/db/migrations中添加对应的sql文件. 文件格式为:  版本号.sql 。
 > 
 
@@ -134,6 +130,8 @@ public class BookDao extends AbsDAO<Book> {
 * deleteFrom(Class daoClass) : 删除数据
 * updateFrom(Class daoClass) : 更新数据
 * selectFrom(Class daoClass) : 查询数据
+
+更多的接口文档请移步 : [api 文档](javadoc/index.html) .
 
 上述四个接口都是 DatabaseHelper类中的静态共有函数，因此静态import之后就可以直接使用上述接口，使用示例如下: 
 
