@@ -68,30 +68,7 @@ CREATE TABLE borrow (
 
 ```
 
-
-## 三、数据库升级的sql语句
-
-升级数据库的sql语句我们也是存放在 assets 目录中, 该目录我们也可以在构建Builder时自行设置，默认为 assets/db/migrations 文件夹。升级的sql文件命名模式为: 版本号.sql , 例如 3.sql 代表数据库从小于3的版本号升级到3时最后一次需要执行的升级语句。加入用户在数据库版本号为1时安装了应用，现在用户更新应用，此时该应用的数据库版本已经为3，并且版本2时也升级了数据库。那么 migrations中应该有两个文件，分别为 2.sql 和 3.sql， 此时该用户升级就会执行 2.sql 和 3.sql 中的语句.
-
-例如, 2.sql 为 : 
-
-```
-ALTER TABLE users ADD COLUMN age INTEGER;
-```
-
-3.sql 为 : 
-
-```
-ALTER TABLE users ADD COLUMN gender INTEGER;
-```
-
-从版本号为1升级到3时，那么就会执行上述的sql语句。
-
-> ***注意*** : 如果升级了任意表结构，一定要到升级版本号,并且在 assets/db/migrations中添加对应的sql文件. 文件格式为:  版本号.sql 。
-> 
-
-
-## 数据库的增删改查
+## 三、数据库的增删改查
 
 
 首先建立 操作数据库表的DAO对象, 例如 : 
@@ -131,7 +108,7 @@ public class BookDao extends AbsDAO<Book> {
 * updateFrom(Class daoClass) : 更新数据
 * selectFrom(Class daoClass) : 查询数据
 
-更多的接口文档请移步 : [api 文档](javadoc/index.html) .
+更多的接口文档请移步 : [api 文档](javadoc/index.html)
 
 上述四个接口都是 DatabaseHelper类中的静态共有函数，因此静态import之后就可以直接使用上述接口，使用示例如下: 
 
@@ -173,6 +150,42 @@ public class BookModel {
               .where(selection, args).listener(listener).execute();
     }
 ```
+
+## 四、数据库升级的sql语句
+
+升级数据库的sql语句我们也是存放在 assets 目录中, 该目录我们也可以在构建Builder时自行设置，默认为 assets/db/migrations 文件夹。升级的sql文件命名模式为: 版本号.sql , 例如 3.sql 代表数据库从小于3的版本号升级到3时最后一次需要执行的升级语句。加入用户在数据库版本号为1时安装了应用，现在用户更新应用，此时该应用的数据库版本已经为3，并且版本2时也升级了数据库。那么 migrations中应该有两个文件，分别为 2.sql 和 3.sql， 此时该用户升级就会执行 2.sql 和 3.sql 中的语句.
+
+例如, 2.sql 为 : 
+
+```
+ALTER TABLE users ADD COLUMN age INTEGER;
+```
+
+3.sql 为 : 
+
+```
+ALTER TABLE users ADD COLUMN gender INTEGER;
+```
+
+从版本号为1升级到3时，那么就会执行上述的sql语句。 数据库升级时需要把 版本号 修改为3 , 例如 : 
+
+```
+/**
+* 初始化数据库
+*/
+private void initDatabase() {
+    new Builder(getApplicationContext())
+        .setDbName("demo.db")              // 数据库名为 demo.db
+        .setDbVersion(3)                   // 数据库版本号为3
+        .setCreateSqlFile("db/create.sql") // 创建数据库表的sql文件在 asserts/db/create.sql文件中
+        .setUpgradePath("db/migrations")  // 数据库升级文件在 asserts/db/migrations 目录中
+        .create();
+ }
+```
+
+> ***注意*** : 如果升级了任意表结构，一定要到升级版本号,并且在 assets/db/migrations中添加对应的sql文件. 文件格式为:  版本号.sql 。
+> 
+
 
 ## License
 
