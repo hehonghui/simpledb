@@ -8,7 +8,7 @@
 * 使用简单、方便
 * 便于数据库升级
 * 非ORM，关系映射自行处理
-* 精简小巧, 小于 35 kb
+* 精简小巧, 小于 30 kb
 
 > 适合的用户 ： 
 > 
@@ -17,7 +17,7 @@
 
 ## 下载
 
-[simpledb-1.0.aar 下载](output/simpledb-1.0.aar)
+[simpledb-1.0.jar 下载](output/simpledb-1.0.jar)
 
 ## 一、初始化数据库
 
@@ -39,7 +39,7 @@ private void initDatabase() {
 
 ## 二、创建数据库表的sql语句
 
-创建数据库的sql语句我们存放在 assets 目录中, 该文件可以在构建Builder时自行设置， 默认为 assets/db/create.sql文件。。
+创建数据库的sql语句我们存放在 assets 目录中, 该文件可以在构建Builder时自行设置， 默认为 assets/db/create.sql文件。
 
 ![](images/project-structure.png)
 

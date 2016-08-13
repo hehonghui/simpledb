@@ -15,3 +15,25 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+-keep class com.simple.database.Builder {
+    public * ;
+}
+
+-keep class com.simple.database.DatabaseHelper {
+    public * ;
+}
+
+-keep class com.simple.database.dao.** {
+    * ;
+}
+
+-keep class com.simple.database.crud.** {
+    public * ;
+}
+
+-keep interface com.simple.database.listeners.** {
+    * ;
+}
+
+-keepattributes Signature

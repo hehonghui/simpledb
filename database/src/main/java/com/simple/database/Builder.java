@@ -6,7 +6,7 @@ import android.text.TextUtils;
 /**
  * 创建数据库
  */
-public  class Builder {
+public class Builder {
     /**
      * 存放创建数据表的sql文件, 需要存储在assets目录
      */
@@ -38,7 +38,7 @@ public  class Builder {
     /**
      * 清空数据库表的文件位置( 一般存在assets目录中 ),具体的文件名, 默认为 db/clean.sql
      */
-    String emptySqlFile= CLEAN_SQL_FILE;
+    String emptySqlFile = CLEAN_SQL_FILE;
     /**
      * 升级数据库的sql文件存储目录,默认为 db/migrations
      */
@@ -60,6 +60,7 @@ public  class Builder {
 
     /**
      * 设置创建数据库表的sql文件
+     *
      * @param createSqlFile
      * @return
      */
@@ -70,6 +71,7 @@ public  class Builder {
 
     /**
      * 设置清空数据库的sql文件
+     *
      * @param createSqlFile
      * @return
      */
@@ -80,6 +82,7 @@ public  class Builder {
 
     /**
      * 设置更新路径
+     *
      * @param upgradePath
      * @return
      */
@@ -104,7 +107,7 @@ public  class Builder {
         return createSqlFile;
     }
 
-    public String getCleanSqlFile(){
+    public String getCleanSqlFile() {
         return emptySqlFile;
     }
 
