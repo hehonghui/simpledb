@@ -17,12 +17,12 @@ public class InsertBuilder<T> extends BaseSQLBuilder<T> {
 
     final List<T> mItems = new ArrayList<>();
 
-    public InsertBuilder withItem(T item) {
+    public InsertBuilder<T>  withItem(T item) {
         mItems.add(item);
         return this;
     }
 
-    public InsertBuilder withItems(List<T> items) {
+    public InsertBuilder<T>  withItems(List<T> items) {
         mItems.addAll(items);
         return this;
     }

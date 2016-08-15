@@ -16,13 +16,13 @@ public class UpdateBuilder<T> extends WhereBuilder<T> {
         super(daoClass);
     }
 
-    public UpdateBuilder withItem(T mItem) {
+    public UpdateBuilder<T> withItem(T mItem) {
         this.mItem = mItem;
         return this;
     }
 
     @Override
-    public UpdateBuilder where(String selection, String[] selectionArgs) {
+    public UpdateBuilder<T> where(String selection, String[] selectionArgs) {
         super.where(selection, selectionArgs);
         return this;
     }
